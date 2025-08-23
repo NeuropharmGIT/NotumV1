@@ -115,6 +115,8 @@ async def main():
     """
     if not os.path.exists(SESSION_FILE):
         await authenticate()
+    else:
+        print("Session file found, proceeding directly to scrape.")
 
     await scrape_conversations()
 
