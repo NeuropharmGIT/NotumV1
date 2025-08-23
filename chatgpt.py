@@ -5,8 +5,13 @@ from playwright.async_api import async_playwright
 from playwright_stealth.stealth import stealth
 
 SESSION_FILE = "session.json"
+OUTPUT_FILE = "chatgpt_conversations.jsonl"
 
 async def authenticate():
+    """
+    Launches a headed browser for the user to log in to ChatGPT manually.
+    Saves the session state to a file after successful login.
+    """
     async with async_playwright() as p:
         browser = await p.chromium.launch(headless=False)
         context = await browser.new_context()
@@ -16,8 +21,7 @@ async def authenticate():
 
         print("="*80)
         print("A browser window will be opened. Please log in to your ChatGPT account.")
-        print("After you have successfully logged in, this script will automatically detect it,")
-        print("save your session, and close the browser. Please do not close it manually.")
+        print("After you have successfully logged in, please press Enter in this terminal.")
         print("="*80)
 
         await page.goto("https://chat.openai.com/")
@@ -34,15 +38,18 @@ async def authenticate():
             print(f"Session state saved to '{SESSION_FILE}'. The browser will now close.")
 
         except Exception as e:
-            print(f"\nAn error occurred or the login was not completed in time: {e}")
+            print(f"\nAn error occurred during the authentication process: {e}")
         finally:
             await browser.close()
 
 
 async def scrape_conversations():
+    """
+    Launches a headless browser using a saved session to scrape conversations.
+    """
     if not os.path.exists(SESSION_FILE):
-        print(f"Session file '{SESSION_FILE}' not found. Please run the authentication first.")
-        return []
+        print(f"Session file '{SESSION_FILE}' not found. Please run authentication first.")
+        return
 
     all_conversations = []
 
@@ -53,7 +60,7 @@ async def scrape_conversations():
 
         await stealth(page)
 
-        print("Logging in using saved session...")
+        print("\nLogging in using saved session...")
         await page.goto("https://chat.openai.com/")
 
         try:
@@ -88,29 +95,30 @@ async def scrape_conversations():
                 await asyncio.sleep(1)
 
         except Exception as e:
-            print(f"An error occurred during scraping: {e}")
+            print(f"\nAn error occurred during scraping: {e}")
         finally:
             await browser.close()
             print("Scraping finished.")
 
             if all_conversations:
-                output_file = "notum_app/data/chatgpt_conversations.jsonl"
-                os.makedirs(os.path.dirname(output_file), exist_ok=True)
-                print(f"Saving {len(all_conversations)} conversations to {output_file}...")
-                with open(output_file, 'w', encoding='utf-8') as f:
+                print(f"Saving {len(all_conversations)} conversations to {OUTPUT_FILE}...")
+                with open(OUTPUT_FILE, 'w', encoding='utf-8') as f:
                     for conversation in all_conversations:
                         f.write(json.dumps(conversation, ensure_ascii=False) + '\n')
                 print("Save complete.")
-
-            return all_conversations
+            else:
+                print("No conversations were saved.")
 
 async def main():
-    """Helper function to run the authentication or scraping process directly for testing."""
+    """
+    Main orchestration function.
+    """
     if not os.path.exists(SESSION_FILE):
-        print("Session file not found. Starting authentication process.")
         await authenticate()
-    else:
-        print("Session file found. To test scraping, you would call scrape_conversations().")
+
+    await scrape_conversations()
 
 if __name__ == "__main__":
+    print("--- Starting Notum ChatGPT Scraper ---")
     asyncio.run(main())
+    print("--- Scraper Finished ---")
