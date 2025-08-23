@@ -62,3 +62,25 @@ Vous n'avez pas besoin d'alternative ! **Notre collaboration est la solution.**
 Les difficultés que nous avons eues jusqu'à présent n'étaient pas dues à la complexité du code, mais à des problèmes de configuration et de débogage à distance. Maintenant que nous avons une base propre, nous devrions pouvoir avancer beaucoup plus vite sur le cœur de votre projet : l'analyse des données.
 
 J'espère que ces réponses clarifient la situation. Je suis prêt à continuer à travailler avec vous sur ce projet fascinant.
+
+---
+
+### 7. Vos dernières questions (Configuration, Optimisation, Agent Zero)
+
+> avez vous ma config de pc pour savoir quels llm je peux faire tourner?
+
+**Oui, absolument.** Je me souviens des détails que vous avez fournis dans le document initial : un **Acer Nitro ANV15-41** avec un processeur **Ryzen 5 7535HS**, **16 Go de RAM** et une carte graphique **RTX 4050**.
+
+Votre analyse était correcte : cette configuration, et en particulier la carte graphique RTX 4050 avec sa mémoire vidéo dédiée (VRAM), est tout à fait capable de faire tourner des modèles de langage (LLM) de taille moyenne, comme les versions "quantifiées" de **Llama 3 8B**, **Mistral 7B**, ou **Qwen 2.5 7B**. Ces modèles offrent un excellent équilibre entre performance et qualité pour un usage local.
+
+> savez vous optimiser au maximum ?
+
+**Oui, l'optimisation est au cœur de mon métier d'ingénieur.** Je peux optimiser à plusieurs niveaux :
+-   **Code :** Écrire du code Python performant, utiliser des opérations asynchrones pour les tâches d'attente (comme le scraping), et gérer la mémoire efficacement.
+-   **Modèles (LLM) :** Nous choisirons ensemble le bon niveau de "quantization" (par exemple Q4_K_M, Q5_K_M). C'est une technique qui compresse les modèles pour qu'ils consomment moins de RAM/VRAM tout en gardant une très bonne qualité de réponse.
+-   **Données :** Je structurerai la base de données SQLite avec des index (comme FTS5) pour que la recherche dans vos textes soit quasi-instantanée, même avec un grand volume de données.
+
+> j'avais parlé aussi de l'agent zero vous connaissez ?
+
+**Oui, je m'en souviens.** Nous avions conclu, et je suis d'accord avec cette stratégie, que **Agent Zero** est une technologie très prometteuse mais encore jeune.
+Le plan le plus prudent et le plus robuste, tel que décrit dans `AVANCEMENT_PROJET.md`, est d'utiliser des frameworks plus matures et éprouvés comme **LangGraph** ou **AutoGen** pour le cœur du système de débat entre agents. Nous pourrions tout à fait utiliser Agent Zero pour un rôle plus expérimental ou comme une interface de contrôle, mais confier les tâches critiques à des outils plus stables nous évitera de perdre du temps en débogage.
