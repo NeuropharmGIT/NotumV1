@@ -2,7 +2,7 @@ import asyncio
 import os
 import json
 from playwright.async_api import async_playwright
-from playwright_stealth.stealth import Stealth
+from playwright_stealth.stealth import stealth
 
 SESSION_FILE = "session.json"
 
@@ -12,7 +12,7 @@ async def authenticate():
         context = await browser.new_context()
         page = await context.new_page()
 
-        await Stealth(page)
+        await stealth(page)
 
         print("="*80)
         print("A browser window will be opened. Please log in to your ChatGPT account.")
@@ -51,7 +51,7 @@ async def scrape_conversations():
         context = await browser.new_context(storage_state=SESSION_FILE)
         page = await context.new_page()
 
-        await Stealth(page)
+        await stealth(page)
 
         print("Logging in using saved session...")
         await page.goto("https://chat.openai.com/")
