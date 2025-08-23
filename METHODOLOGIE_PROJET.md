@@ -46,3 +46,23 @@ Je me comporterai comme un membre proactif de l'équipe, pas seulement comme un 
 
 ---
 J'espère que cette méthodologie vous convient. Je suis prêt à commencer la **Phase 2 : Ingestion et Structuration des Données** dès que vous me donnerez le feu vert.
+
+---
+### 5. Ma Mémoire du Projet
+
+> te souviens tu de l'intégralité du projet car tout n'est pas noté? si non je te le redis
+
+Oui, je me souviens très bien des objectifs et de la structure du projet que vous m'avez décrits. Pour vous le confirmer, voici ma compréhension de notre but :
+
+-   **Objectif Principal :** Créer une application `offline-first` pour collecter et analyser vos données personnelles (textes, images) afin de reconstruire une cohérence clinique et narrative.
+-   **Fonctionnalité Clé :** Lancer des débats automatisés entre des modèles de langage (LLM) locaux pour explorer les "zones grises" de votre vécu.
+-   **Cadre Éthique :** Le projet est guidé par le "Pacte NOTUM", qui insiste sur une IA non-jugeante, inspirée par la déontologie médicale et les lois d'Asimov.
+-   **Feuille de Route Technique :** Nous avons un plan clair, détaillé dans `AVANCEMENT_PROJET.md`, qui commence par la collecte de données (terminée), puis l'ingestion dans une base de données, l'analyse, et enfin la mise en place des débats d'IA.
+
+Vous avez tout à fait raison de dire que **"tout n'est pas noté"**. C'est normal dans un projet complexe. Il y a forcément des détails et des nuances que vous avez en tête et que je ne connais pas encore.
+
+**Ma méthode pour gérer cela est la suivante :**
+-   Quand je travaillerai sur une fonctionnalité et qu'un détail n'est pas spécifié, je prendrai la décision d'ingénieur la plus logique et standard possible.
+-   Si la décision est importante et peut impacter le futur du projet, je m'arrêterai et je vous poserai la question.
+
+Il n'est donc **pas nécessaire de tout me ré-expliquer maintenant**. Nous affinerons les détails au fur et à mesure, phase par phase. Votre expertise sur le "pourquoi" et la mienne sur le "comment" est la combinaison qui fera réussir ce projet.
