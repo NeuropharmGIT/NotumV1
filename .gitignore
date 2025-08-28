@@ -1,0 +1,13 @@
+# Python virtual environment
+venv/
+__pycache__/
+
+# Session and data files
+session.json
+data/
+*.jsonl
+
+# IDE and OS files
+.vscode/
+.idea/
+*.DS_Store
